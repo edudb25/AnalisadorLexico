@@ -1,111 +1,132 @@
 #type não ta utilizado corretamente, criar função depois.
 #Faltando outra parte
-from typing import Type
-from Tag import tag
-from Word import create_token
-import sys
-
+import Real
+import Num
+import Token
+import Tag 
+import Word
+from Word import lexemes
 line = 1
 peek = ''
 words = {}
+global buffer
+buffer = []
+index = 0
+import Table
+retorno = []
 
-def reserve(w):
-    words[w.lexeme] = w
+simple_tags = [';', '-', '+', '*', '/', '(', ')', '[', ']', '{', '}']
 
-def Lexer():
-    reserve(create_token("if", tag.IF))
-    reserve(create_token("else", tag.ELSE))
-    reserve(create_token("while", tag.WHILE))
-    reserve(create_token("do", tag.DO))
-    reserve(create_token("break", tag.BREAK))
-    reserve(create_token("true", tag.TRUE))
-    reserve(Type.Int)
-    reserve(Type.Bool)
-    reserve(create_token("False", tag.FALSE))
-    reserve(Type.Char)
-    reserve(Type.Float)
+def cria_Lexer(b):
+    global buffer
+    buffer = b
+    print(buffer)
 
 def readch():
+    global index
     global peek
-    peek = sys.stdin.read(1)
+    global buffer
+    peek = buffer[index]
+    index+=1
+    return index
 
-def readch(c):
-    readch()
-    if peek != c:
-        return False
-    peek = ''
-    return True
-#FALTA TERMINAR
+def readch_next():
+    global buffer
+    global index
+    return buffer[index]
+
 def scan():
-    while True:
-        if peek == '\n':
-            line += 1
-        else:
-            break
+    global line
+    global peek
+    token = {}
 
-    if peek == '&':
-        if readch('&'):
-            return Word.and_token
+    if peek == '\n':
+        line += 1
+        return True
+    
+    elif peek == ' ' or peek == '\t' or peek == '\r':
+        return True
+    
+    elif peek == '&':
+        if readch_next() == '&':
+            readch()
+            token = Word.lexemes['AND']
         else:
-            return Token('&')
+            token = Token.cria_Token('&')
+
     elif peek == '|':
-        if readch('|'):
-            return Word.or_token
+        if readch_next() == '|':
+            readch()
+            token = Word.lexemes['OR']
         else:
-            return Token('|')
+            token = Token.cria_Token('|')
+
     elif peek == '=':
-        if readch('='):
-            return Word.eq_token
+        if readch_next() == '=':
+            readch()
+            token = Word.lexemes['EQ']
         else:
-            return Token('=')
+            token = Token.cria_Token('=')
+
     elif peek == '!':
-        if readch('='):
-            return Word.ne_token
+        if readch_next() == '=':
+            readch()
+            token = Word.lexemes['NE']
         else:
-            return Token('!')
+            token = Token.cria_Token('!')
+
     elif peek == '<':
-        if readch('='):
-            return Word.le_token
+        if readch_next() == '=':
+            readch()
+            token = Word.lexemes['LE']
         else:
-            return Token('<')
+            token = Token.cria_Token('<')
+
     elif peek == '>':
-        if readch('='):
-            return Word.ge_token
+        if readch_next() == '=':
+            readch()
+            token = Word.lexemes['GE']
         else:
-            return Token('>')
+            token = Token.cria_Token('>')
+
+    elif peek in simple_tags:
+        token = Token.cria_Token(peek)
 
     if peek.isdigit():
-        v = 0
-        while peek.isdigit():
-            v = 10 * v + int(peek)
+        v = int(peek)
+        while readch_next().isdigit():
             readch()
+            v = 10 * v + int(peek)
 
-        if peek != '.':
-            return Num(v)
+        if readch_next() != '.':
+            token = Num.create_num_token(v)
         
-        x = float(v)
+        readch()
+        v = float(v)
         d = 10.0
 
-        while True:
+        while readch_next().isdigit():
             readch()
-            if not peek.isdigit():
-                break
-            x = x + int(peek) / d
+            v = v + int(peek) / d
             d = d * 10.0
-        
-        return Real(x)
-
+        if not v in Table.values:
+            Table.values.append(v)
+        token = Real.create_real_token(v)
+    
     if peek.isalpha():
-        b = ''
-        while peek.isalnum():
-            b += peek
+        b = peek
+        while readch_next().isalpha():
             readch()
+            b += peek
 
-        s = b
-        w = Word.get(s)
-        if w is not None:
-            return w
+        w = Word.lexemes.get(b.upper())
+        if w is not None: # cria token de palavra reservada
+            token = w
         else:
-            w = Word(s, Tag.ID)
-            return w
+            w = Word.create_token(b, Tag.tags.get('ID')) # cria token de id
+            if not b in Table.ids:
+                Table.ids.append(b)
+            token = w
 
+    retorno.append(token)
+    return True
