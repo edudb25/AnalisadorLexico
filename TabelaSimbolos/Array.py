@@ -1,4 +1,8 @@
-# File: Array.py
+# Arquivo: Array.py
+
+import Lexer #Não acessado no código a seguir
+import Tag
+
 def create_array(sz, p):
     def get_width():
         return sz * p["get_width"]()
@@ -8,24 +12,20 @@ def create_array(sz, p):
 
     return {"get_width": get_width, "to_string": to_string}
 
-# Import statements from Java code
-import Lexer
-from Lexer import Tag
-
-# Functions for Type and Real
+# Funções para Type e Real
 def create_type(name, lexeme, width):
     return {"get_width": lambda: width, "to_string": lambda: name}
 
 def create_real():
     return {"get_width": lambda: 0, "to_string": lambda: ""}
 
-# Definitions and initializations
+# Definições e inicializações
 def create_real_token(v):
     return {"tag": Tag.tags.get("REAL"), "value": v}
 
-# Usage
+# Uso
 size = 1
-p = create_type("int", None, 4)  # Replace None with appropriate lexeme for int_type
+p = create_type("int", None, 4)  # Substituir None com um lexeme apropriado para o int_type
 array = create_array(size, p)
 print(array["get_width"]())  # Output: 4
-print(array["to_string"]())  # Output: [1] (assuming int_type provides 'int' as the name)
+print(array["to_string"]())  # Output: [1] (assumindo que int_type define 'int' como o name)
