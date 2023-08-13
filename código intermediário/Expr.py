@@ -1,31 +1,38 @@
-from lexer import Token
-from symbols import Type
-from Node import Node  # Certifique-se de importar a classe Node se ela não estiver incluída no arquivo
+def emit(code):
+    print(code)
 
-class Expr(Node):
-    def __init__(self, tok, p):
-        self.op = tok
-        self.type = p
+# Função para simular o método emitjumps
+def emitjumps(test, t, f):
+    if t != 0 and f != 0:
+        emit("if " + test + " goto L" + str(t))
+        emit("goto L" + str(f))
+    elif t != 0:
+        emit("if " + test + " goto L" + str(t))
+    elif f != 0:
+        emit("iffalse " + test + " goto L" + str(f))
+    else:
+        pass  # Nada, pois tanto t quanto f caem diretamente
 
-    def gen(self):
-        return self
+# Função que simula o comportamento da classe Expr
+def create_expr(tok, p):
+    op = tok
+    type_ = p
 
-    def reduce(self):
-        return self
+    def gen():
+        return create_expr(op, reduce(expr1), reduce(expr2))
 
-    def jumping(self, t, f):
-        self.emitjumps(str(self), t, f)
+    def reduce(expression):
+        return create_expr(op, reduce(expr1), reduce(expr2))
 
-    def emitjumps(self, test, t, f):
-        if t != 0 and f != 0:
-            self.emit("if " + test + " goto L" + str(t))
-            self.emit("goto L" + str(f))
-        elif t != 0:
-            self.emit("if " + test + " goto L" + str(t))
-        elif f != 0:
-            self.emit("iffalse " + test + " goto L" + str(f))
-        else:
-            pass  # Nada, pois tanto t quanto f caem diretamente
+    def jumping(t, f):
+        emitjumps(str(op), t, f)
 
-    def __str__(self):
-        return str(self.op)
+    def get_str():
+        return str(op)
+
+    return {
+        'gen': gen,
+        'reduce': reduce,
+        'jumping': jumping,
+        'get_str': get_str
+    }
