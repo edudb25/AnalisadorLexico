@@ -1,19 +1,18 @@
-class Node:
-    def __init__(self):
-        self.lexline = 0
-        self.lexline = Lexer.line
+# Variáveis globais simulando a propriedade de classes
+lexline = 0
+labels = 0
 
-    def error(self, s):
-        raise Error("near line" + str(self.lexline) + ": " + s)
+def error(s):
+    raise Exception("near line " + str(lexline) + ": " + s)
 
-    labels = 0
+def newlabel():
+    global labels
+    labels = labels + 1
+    return labels
 
-    def newlabel(self):
-        labels = labels + 1
-        return labels
+def emitlabel(i):
+    print("L" + str(i) + ":")
 
-    def emitlabel(self, i):
-        print("L" + str(i) + ":")
+def emit(s):
+    print("\t" + s)
 
-    def emit(self, s):
-        print("\t" + s)
