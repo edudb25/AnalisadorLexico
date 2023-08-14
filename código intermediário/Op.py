@@ -1,12 +1,30 @@
-from lexer import Token
-from symbols import Type
-from Expr import Expr, Temp 
-class Op(Expr):
-    def __init__(self, tok, p):
-        super().__init__(tok, p)
+# Funções para simular Token e Type
+def create_token(value):
+    return {'value': value}
 
-    def reduce(self):
-        x = self.gen()
-        t = Temp(self.type)
-        self.emit(str(t) + " = " + str(x))
+def create_type():
+    return {}
+
+# Função para simular o método emit
+def emit(code):
+    print(code)
+
+# Função que simula o comportamento da classe Op
+def create_op(tok, p):
+    op = tok
+    type_ = p
+
+    def reduce(expression):
+        x = gen()
+        t = Temp(type_)
+        emit(str(t) + " = " + str(x))
         return t
+
+    return {
+        'reduce': reduce
+    }
+
+# Função que simula o comportamento da função Temp
+def Temp(type_):
+    return "Temp_" + str(type_)
+
