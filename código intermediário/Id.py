@@ -1,27 +1,43 @@
-from lexer import Word
+from lexer import Token
 from symbols import Type
 
-def create_id(id_token, p, b):
-    offset = b
-    
-    def expr():
+def create_op(tok, p):
+    def op():
         return {
-            "op": id_token,
+            "tok": tok,
             "type": p,
-            "offset": offset,
             "gen": gen,
-            "reduce": reduce,
-            "__str__": __str__
+            "reduce": reduce
         }
     
     def gen():
-        return expr()
+        return create_op(tok, p)
     
     def reduce():
-        return expr()
+        x = op()["gen"]()
+        t = create_temp(op()["type"])
+        emit(str(t) + " = " + str(x))
+        return t
+    
+    return op()
+
+def create_temp(p):
+    count = 0
+    
+    def temp():
+        nonlocal count
+        count += 1
+        return {
+            "type": p,
+            "number": count
+        }
     
     def __str__():
-        return str(id_token)
+        return "t" + str(temp()["number"])
     
-    return expr()
+    temp()["__str__"] = __str__
+    return temp()
+
+def emit(s):
+    print("\t" + s)
 
