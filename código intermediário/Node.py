@@ -1,13 +1,16 @@
-# Variáveis globais simulando a propriedade de classes
 lexline = 0
 labels = 0
 
+def Node():
+    global lexline
+    lexline = Lexer.line
+
 def error(s):
-    raise Exception("near line " + str(lexline) + ": " + s)
+    raise Error("near line" + str(lexline) + ": " + s)
 
 def newlabel():
     global labels
-    labels = labels + 1
+    labels += 1
     return labels
 
 def emitlabel(i):
@@ -15,4 +18,3 @@ def emitlabel(i):
 
 def emit(s):
     print("\t" + s)
-
