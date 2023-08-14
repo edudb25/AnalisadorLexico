@@ -1,13 +1,21 @@
 from lexer import Word
 from symbols import Type
-from Expr import Expr  
-class Temp(Expr):
+
+def create_temp(p):
     count = 0
+    
+    def temp():
+        nonlocal count
+        count += 1
+        return {
+            "p": p,
+            "number": count,
+            "__str__": __str__
+        }
+    
+    def __str__():
+        return "t" + str(temp()["number"])
+    
+    temp()["__str__"] = __str__
+    return temp()
 
-    def __init__(self, p):
-        super().__init__(Word.temp, p)
-        self.number = Temp.count
-        Temp.count += 1
-
-    def __str__(self):
-        return "t" + str(self.number)
