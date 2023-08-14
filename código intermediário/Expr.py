@@ -1,38 +1,34 @@
-def emit(code):
-    print(code)
-
-# Função para simular o método emitjumps
-def emitjumps(test, t, f):
-    if t != 0 and f != 0:
-        emit("if " + test + " goto L" + str(t))
-        emit("goto L" + str(f))
-    elif t != 0:
-        emit("if " + test + " goto L" + str(t))
-    elif f != 0:
-        emit("iffalse " + test + " goto L" + str(f))
-    else:
-        pass  # Nada, pois tanto t quanto f caem diretamente
-
-# Função que simula o comportamento da classe Expr
-def create_expr(tok, p):
+def expr(tok, p):
     op = tok
-    type_ = p
-
+    type = p
+    
     def gen():
-        return create_expr(op, reduce(expr1), reduce(expr2))
-
-    def reduce(expression):
-        return create_expr(op, reduce(expr1), reduce(expr2))
-
+        return expr
+    
+    def reduce():
+        return expr
+    
     def jumping(t, f):
-        emitjumps(str(op), t, f)
-
-    def get_str():
+        emitjumps(str(expr), t, f)
+    
+    def emitjumps(test, t, f):
+        if t != 0 and f != 0:
+            emit("if " + test + " goto L" + str(t))
+            emit("goto L" + str(f))
+        elif t != 0:
+            emit("if " + test + " goto L" + str(t))
+        elif f != 0:
+            emit("iffalse " + test + " goto L" + str(f))
+        else:
+            pass
+    
+    def __str__():
         return str(op)
-
+    
     return {
-        'gen': gen,
-        'reduce': reduce,
-        'jumping': jumping,
-        'get_str': get_str
+        "gen": gen,
+        "reduce": reduce,
+        "jumping": jumping,
+        "emitjumps": emitjumps,
+        "__str__": __str__
     }
