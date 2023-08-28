@@ -1,9 +1,9 @@
 # Arq Set.py
-from lexer import Id
-from symbols import Type
-from stmt import Stmt
-from expr import Expr
-from emit import emit, error
+import Id
+import Type
+import Stmt
+import Expr
+
 
 def create_set_stmt(i, x):
     id = i
