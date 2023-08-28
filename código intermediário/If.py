@@ -1,4 +1,4 @@
-# File If.py (Python module)
+# Arq If.py
 from symbols import Type, newlabel
 from stmt import Stmt
 from expr import Expr
