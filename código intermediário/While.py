@@ -1,8 +1,8 @@
 # Arq While.py
-from symbols import Type, newlabel
-from stmt import Stmt
-from expr import Expr
-from emit import emit
+import Type
+from Node import newlabel, emitlabel, emit
+import Stmt
+from Expr import expr
 
 expr = None
 stmt = None
