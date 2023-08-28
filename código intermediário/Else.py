@@ -1,4 +1,4 @@
-#Arquico Else.py
+#Arq Else.py
 import Type
 import newlabel
 from Stmt import stmt
