@@ -1,9 +1,8 @@
 #Arq Else.py
-import Type
-import newlabel
-from Stmt import stmt
-from Expr import expr
-from Emit import emit
+import Type#,newlabel
+import Stmt
+import Expr
+
 
 def create_else_stmt(x, s1, s2):
     if x["type"] != Type.BOOL:
