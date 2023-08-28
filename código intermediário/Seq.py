@@ -1,6 +1,5 @@
 # Arq Seq.py
-from stmt import Stmt
-from emit import emit, emitlabel
+import Stmt
 
 def create_seq(s1, s2):
     stmt1 = s1
