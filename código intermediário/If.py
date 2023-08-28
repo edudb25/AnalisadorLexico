@@ -1,7 +1,7 @@
 # Arq If.py
-from symbols import Type, newlabel
-from stmt import Stmt
-from expr import Expr
+import Type #, newlabel
+import Stmt
+import Expr
 
 def create_if_stmt(x, s):
     if x["type"] != Type.BOOL:
