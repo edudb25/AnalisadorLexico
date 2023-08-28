@@ -1,8 +1,7 @@
 # Arq Rel.py
-from lexer import Token
-from symbols import Type, Array
-from expr import Expr, Logical
-from emit import emitjumps
+import Token
+import Type, Array
+import Expr, Logical
 
 def create_rel(tok, x1, x2):
     super(tok, x1, x2)
