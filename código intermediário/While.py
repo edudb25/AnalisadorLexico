@@ -1,4 +1,4 @@
-# Arquivo While.py (Módulo Python)
+# Arq While.py
 from symbols import Type, newlabel
 from stmt import Stmt
 from expr import Expr
