@@ -1,6 +1,5 @@
 # Arq Break.py
-from stmt import Stmt
-from emit import emit, error
+import Stmt
 
 stmt = None
 
