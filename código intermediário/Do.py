@@ -1,8 +1,7 @@
 # Arq Do.py
-from symbols import Type, newlabel
-from Stmt import Stmt
-from Expr import Expr
-from Emit import emit
+import Type#, newlabel
+import Stmt
+import Expr
 
 expr = None
 stmt = None
