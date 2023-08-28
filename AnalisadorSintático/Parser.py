@@ -2,6 +2,29 @@ import Lexer
 import Tag
 import Type
 import Word
+import Stmt
+import While
+import Id
+import Seq
+import Array
+import Do
+import Lexer
+import If
+import Else
+import Break
+import Or
+import And
+import Not
+import Rel
+import Arith
+import Set
+import SetElem
+import Constant
+import Token
+import Access
+import Unary
+
+from Node import emitlabel
 
 top = None
 used = 0
