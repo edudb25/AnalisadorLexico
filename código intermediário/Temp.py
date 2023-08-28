@@ -1,5 +1,5 @@
-from lexer import Word
-from symbols import Type
+from Lexer import Word
+import Type
 
 def create_temp(p):
     count = 0
