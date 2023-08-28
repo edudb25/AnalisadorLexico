@@ -1,5 +1,5 @@
 # Arq Stmt.py
-from Node import node
+import Node
 
 def gen_stmt(b, a):
     pass  # Chamado com rótulos begin e after
