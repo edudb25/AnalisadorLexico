@@ -1,9 +1,8 @@
 # Arq Access.py
-from lexer import Word, Tag
-from symbols import Type
-from op import Op
-from expr import Expr
-from emit import emitjumps
+import Word, Tag
+import Type
+import Op
+import Expr
 
 def create_access(a, i, p):
     super(Word("[]", Tag.INDEX), p)  # p is element type after flattening the array
