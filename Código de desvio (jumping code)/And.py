@@ -1,8 +1,7 @@
 # Arq And.py
-from lexer import Token
-from symbols import Type
-from expr import Expr, Logical
-from emit import emit, emitlabel, newlabel
+import Token
+import Type
+import Expr, Logical
 
 def create_and(tok, x1, x2):
     super(tok, x1, x2)
