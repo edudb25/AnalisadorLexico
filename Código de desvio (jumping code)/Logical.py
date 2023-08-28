@@ -1,8 +1,7 @@
 # Arq Logical.py
-from lexer import Token
-from symbols import Type
-from expr import Expr, Temp
-from emit import emit, emitlabel, newlabel
+import Token
+import Type
+import Expr, Temp
 
 def create_logical(tok, x1, x2):
     super(tok, None)  # null type to start
