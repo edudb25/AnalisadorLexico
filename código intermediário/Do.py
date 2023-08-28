@@ -1,4 +1,4 @@
-# Arquivo Do.py (Módulo Python)
+# Arq Do.py
 from symbols import Type, newlabel
 from Stmt import Stmt
 from Expr import Expr
