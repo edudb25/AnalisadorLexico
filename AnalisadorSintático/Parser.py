@@ -291,7 +291,5 @@ def offset(a):
 lex = None  # Your lexer implementation goes here
 look = None
 
-# You may need to define the necessary classes like Id, Stmt, Expr, etc. based on your code's context.
-
-# Now you can call the `program()` function to start parsing.
+# Agora você pode chamar a função program() para começar o parsing.
 
