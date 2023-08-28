@@ -1,5 +1,5 @@
-from lexer import Token, Word
-from symbols import Type
+import Token, Word
+import Type
 
 # Função para criar constantes
 def Constant(tok, p):
