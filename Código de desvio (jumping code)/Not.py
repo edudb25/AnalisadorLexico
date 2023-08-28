@@ -1,7 +1,7 @@
 # Arq Not.py
-from lexer import Token
-from symbols import Type
-from expr import Expr, Logical
+import Token
+import Type
+import Expr, Logical
 
 def create_not(tok, x2):
     super(tok, x2, x2)
