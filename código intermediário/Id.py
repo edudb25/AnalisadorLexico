@@ -1,5 +1,5 @@
-from lexer import Token
-from symbols import Type
+import Token
+import Type
 
 def create_op(tok, p):
     def op():
