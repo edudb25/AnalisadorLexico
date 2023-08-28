@@ -1,5 +1,5 @@
-from lexer import Token
-from symbols import Type
+from Lexer import Token
+import Type
 
 def create_unary(tok, x):
     def unary():
