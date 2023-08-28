@@ -1,9 +1,8 @@
 # Arq SetElem.py
-from lexer import Id
-from symbols import Type, Array
-from stmt import Stmt
-from expr import Expr, Access
-from emit import emit, error
+import Id
+import Type, Array
+import Stmt
+import Expr, Access
 
 def create_set_elem(x, y):
     global array, index, expr
